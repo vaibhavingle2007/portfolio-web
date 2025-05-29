@@ -23,8 +23,3 @@ Hi! I'm a second-year polytechnic student with a strong interest in UI/UX design
 | 🧩 Frameworks | None (Vanilla and Lightweight tools only) |
 | 🎨 Design     | Figma, Minimal UI principles       |
 | 🌐 Deployment | GitHub Pages                        |
-
----
-
-## 📂 Project Structure
-
