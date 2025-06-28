@@ -1,24 +1,274 @@
+// Enhanced Portfolio JavaScript
 
+// Loading Screen
+function showLoadingScreen() {
+    const loadingScreen = document.querySelector('.loading-screen');
+    if (loadingScreen) {
+        setTimeout(() => {
+            loadingScreen.classList.add('hidden');
+            setTimeout(() => {
+                loadingScreen.remove();
+            }, 500);
+        }, 1500);
+    }
+}
 
+// Navigation Scroll Effect
+function handleNavScroll() {
+    const nav = document.querySelector('.nav');
+    let lastScrollTop = 0;
+    
+    window.addEventListener('scroll', () => {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        
+        // Show nav when scrolling up or at top
+        if (scrollTop <= 50) {
+            nav.classList.remove('visible');
+        } else {
+            nav.classList.add('visible');
+        }
+        
+        lastScrollTop = scrollTop;
+    });
+}
 
+// 3D Card Tilt Effect
+function add3DCardEffect() {
+    document.querySelectorAll('.project-card, .profile-card').forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            
+            const rotateX = (y - centerY) / 10;
+            const rotateY = (centerX - x) / 10;
+            
+            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px)`;
+        });
+        
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(0px)';
+        });
+    });
+}
 
+// Project Modal System
+function createProjectModals() {
+    const projectData = {
+        'youtube-blog': {
+            title: 'YouTube to Blog Converter',
+            description: 'An AI-powered tool that converts YouTube videos into blog posts using machine learning for music, automated content creation.',
+            technologies: ['AI', 'Python', 'Machine Learning', 'Natural Language Processing'],
+            features: [
+                'Video transcription and analysis',
+                'AI-powered content generation',
+                'SEO-optimized blog post creation',
+                'Multiple output formats'
+            ],
+            github: 'https://github.com/vaibhavingle2007/yt_to_blog',
+            demo: '#'
+        },
+        'discover-india': {
+            title: 'DiscoverIndia360',
+            description: 'A sleek UI/UX focused web interface to help users discover incredible places, exploring hidden gems and data visually.',
+            technologies: ['UI/UX', 'HTML', 'CSS', 'JavaScript'],
+            features: [
+                'Interactive map interface',
+                'Location-based recommendations',
+                'Visual data presentation',
+                'Responsive design'
+            ],
+            github: 'https://github.com/vaibhavingle2007/Discoverindia360-sample-web.git',
+            demo: '#'
+        },
+        'weather-app': {
+            title: 'WeatherApp',
+            description: 'A clean and responsive Java-based weather application with API to display real-time weather updates and forecasts.',
+            technologies: ['Java', 'API Integration', 'Weather API'],
+            features: [
+                'Real-time weather data',
+                '5-day forecast',
+                'Location-based weather',
+                'Clean user interface'
+            ],
+            github: 'https://github.com/vaibhavingle2007/weather-app-Java.git',
+            demo: '#'
+        }
+    };
+
+    // Add click handlers to project detail buttons
+    document.querySelectorAll('.project-details-btn').forEach((btn, index) => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            const projectCard = btn.closest('.project-card');
+            const projectKey = projectCard.dataset.project;
+            const project = projectData[projectKey];
+            
+            if (project) {
+                showProjectModal(project);
+            }
+        });
+    });
+
+    // Close modal functionality
+    const modal = document.getElementById('project-modal');
+    const closeBtn = modal.querySelector('.modal-close');
+    
+    closeBtn.addEventListener('click', () => {
+        modal.classList.remove('active');
+    });
+
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.classList.remove('active');
+        }
+    });
+}
+
+function showProjectModal(project) {
+    const modal = document.getElementById('project-modal');
+    const modalBody = modal.querySelector('.modal-body');
+    
+    modalBody.innerHTML = `
+        <div class="modal-header">
+            <h2>${project.title}</h2>
+        </div>
+        <div class="modal-body-content">
+            <p class="modal-description">${project.description}</p>
+            
+            <div class="modal-section">
+                <h3>Technologies Used</h3>
+                <div class="tech-tags">
+                    ${project.technologies.map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
+                </div>
+            </div>
+            
+            <div class="modal-section">
+                <h3>Key Features</h3>
+                <ul class="features-list">
+                    ${project.features.map(feature => `<li>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                        </svg>
+                        <span>${feature}</span>
+                    </li>`).join('')}
+                </ul>
+            </div>
+        </div>
+        
+        <div class="modal-footer">
+            <a href="${project.github}" target="_blank" class="btn btn-primary">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+                View on GitHub
+            </a>
+            ${project.demo && project.demo !== '#' ? `
+            <a href="${project.demo}" target="_blank" class="btn btn-secondary">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                    <polyline points="15 3 21 3 21 9"></polyline>
+                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                </svg>
+                Live Demo
+            </a>` : ''}
+        </div>
+    `;
+    
+    modal.classList.add('active');
+}
+
+// Animated Counter for Skills
+function animateCounters() {
+    const counters = document.querySelectorAll('.skill-item');
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const skillItem = entry.target;
+                const progressBar = skillItem.querySelector('.skill-progress');
+                
+                // Animate progress bar
+                setTimeout(() => {
+                    progressBar.style.width = '100%';
+                }, 100);
+                
+                observer.unobserve(skillItem);
+            }
+        });
+    }, { threshold: 0.5 });
+    
+    counters.forEach(counter => observer.observe(counter));
+}
+
+// Enhanced Scroll Animations
+function enhanceScrollAnimations() {
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.animation = 'fadeInUp 0.8s ease forwards';
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+                
+                // Add floating animation to certain elements
+                if (entry.target.classList.contains('project-card')) {
+                    setTimeout(() => {
+                        entry.target.classList.add('floating');
+                    }, 800);
+                }
+                
+                // Add glow effect to skills
+                if (entry.target.classList.contains('skill-item')) {
+                    setTimeout(() => {
+                        entry.target.classList.add('glow');
+                    }, 1000);
+                }
+            }
+        });
+    }, observerOptions);
+
+    // Observe elements
+    const animateElements = document.querySelectorAll(
+        '.project-card, .skill-item, .contact-item, .about-content > *, .section-header'
+    );
+
+    animateElements.forEach((el, index) => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(30px)';
+        el.style.animationDelay = `${index * 0.1}s`;
+        observer.observe(el);
+    });
+}
 
 // Mobile Navigation Toggle
 const navToggle = document.getElementById('nav-toggle');
-const navMenu = document.querySelector('.nav-menu');
+const navMenu = document.getElementById('nav-menu');
 
+if (navToggle && navMenu) {
 navToggle.addEventListener('click', () => {
+        navToggle.classList.toggle('active');
     navMenu.classList.toggle('active');
-    navToggle.classList.toggle('active');
 });
 
-// Close mobile menu when clicking on links
-document.querySelectorAll('.nav-link').forEach(link => {
+    // Close menu when clicking on links
+    const navLinks = document.querySelectorAll('.nav-link');
+    navLinks.forEach(link => {
     link.addEventListener('click', () => {
+            navToggle.classList.remove('active');
         navMenu.classList.remove('active');
-        navToggle.classList.remove('active');
+        });
     });
-});
+}
 
 // Smooth scrolling for navigation links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -38,117 +288,9 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 window.addEventListener('scroll', () => {
     const nav = document.querySelector('.nav');
     if (window.scrollY > 100) {
-        nav.style.background = 'linear-gradient(135deg, rgba(15, 15, 35, 0.98) 0%, rgba(22, 33, 62, 0.98) 50%, rgba(15, 15, 35, 0.98) 100%)';
-        nav.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.5)';
+        nav.classList.add('visible');
     } else {
-        nav.style.background = 'linear-gradient(135deg, rgba(15, 15, 35, 0.95) 0%, rgba(22, 33, 62, 0.95) 50%, rgba(15, 15, 35, 0.95) 100%)';
-        nav.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.3)';
-    }
-});
-
-// Contact form now handled by Formspree service
-// Form will redirect to a thank you page after submission
-
-// Enhanced Intersection Observer for animations
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-};
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            // Add multiple animation classes based on element type
-            if (entry.target.classList.contains('project-card')) {
-                entry.target.style.animation = 'fadeInUp 0.8s ease forwards';
-                entry.target.classList.add('floating-element');
-            } else if (entry.target.classList.contains('skill-item')) {
-                entry.target.style.animation = 'fadeInUp 0.6s ease forwards';
-                setTimeout(() => {
-                    entry.target.classList.add('glow-effect');
-                }, 600);
-            } else {
-                entry.target.style.animation = 'fadeInUp 0.8s ease forwards';
-            }
-        }
-    });
-}, observerOptions);
-
-// Observe elements for animation
-document.addEventListener('DOMContentLoaded', () => {
-    const animateElements = document.querySelectorAll(
-        '.project-card, .skill-item, .contact-item, .about-content > *'
-    );
-
-    animateElements.forEach((el, index) => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(30px)';
-        el.style.animationDelay = `${index * 0.1}s`;
-        observer.observe(el);
-    });
-});
-
-// Parallax scrolling effects - DISABLED to fix layout issues
-// window.addEventListener('scroll', () => {
-//     const scrolled = window.pageYOffset;
-//     const parallaxElements = document.querySelectorAll('.parallax-element');
-
-//     parallaxElements.forEach((element, index) => {
-//         const speed = 0.5 + (index * 0.1);
-//         const yPos = -(scrolled * speed);
-//         element.style.transform = `translateY(${yPos}px)`;
-//     });
-
-//     // Hero parallax effect
-//     const hero = document.querySelector('.hero');
-//     if (hero) {
-//         const heroOffset = scrolled * 0.5;
-//         hero.style.transform = `translateY(${heroOffset}px)`;
-//     }
-
-//     // Section parallax effects
-//     const sections = document.querySelectorAll('.about, .projects, .contact');
-//     sections.forEach((section, index) => {
-//         const rect = section.getBoundingClientRect();
-//         const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
-
-//         if (isVisible) {
-//             const sectionScrolled = window.pageYOffset - section.offsetTop + window.innerHeight;
-//             const parallaxSpeed = 0.3 + (index * 0.1);
-//             const yOffset = sectionScrolled * parallaxSpeed;
-//             section.style.transform = `translateY(${yOffset * 0.1}px)`;
-//         }
-//     });
-// });
-
-// Typing effect for hero title
-function typeWriter(element, text, speed = 100) {
-    let i = 0;
-    element.innerHTML = '';
-
-    function type() {
-        if (i < text.length) {
-            if (text.charAt(i) === '<') {
-                const tagEnd = text.indexOf('>', i);
-                element.innerHTML += text.substring(i, tagEnd + 1);
-                i = tagEnd + 1;
-            } else {
-                element.innerHTML += text.charAt(i);
-                i++;
-            }
-            setTimeout(type, speed);
-        }
-    }
-
-    type();
-}
-
-// Initialize typing effect
-window.addEventListener('load', () => {
-    const heroTitle = document.querySelector('.hero-title');
-    if (heroTitle) {
-        const titleText = heroTitle.innerHTML;
-        typeWriter(heroTitle, titleText, 80);
+        nav.classList.remove('visible');
     }
 });
 
@@ -174,191 +316,36 @@ document.querySelectorAll('.btn').forEach(button => {
     });
 });
 
-// Add ripple CSS
-const style = document.createElement('style');
-style.textContent = `
-    .btn {
-        position: relative;
-        overflow: hidden;
-    }
-
-    .ripple {
-        position: absolute;
-        border-radius: 50%;
-        background: rgba(255, 255, 255, 0.3);
-        transform: scale(0);
-        animation: ripple 0.6s linear;
-        pointer-events: none;
-    }
-
-    @keyframes ripple {
-        to {
-            transform: scale(4);
-            opacity: 0;
-        }
-    }
-`;
-document.head.appendChild(style);
-
-// Advanced parallax controller - DISABLED to fix layout issues
-// class ParallaxController {
-//     constructor() {
-//         this.elements = [];
-//         this.rafId = null;
-//         this.init();
-//     }
-
-//     init() {
-//         // Add parallax elements
-//         this.addElement('.hero-content', 0.1);
-//         this.addElement('.hero-image', 0.15);
-//         this.addElement('.about-content', 0.05);
-//         this.addElement('.project-card', 0.08);
-//         this.addElement('.contact-content', 0.06);
-
-//         this.bindEvents();
-//     }
-
-//     addElement(selector, speed) {
-//         const elements = document.querySelectorAll(selector);
-//         elements.forEach(element => {
-//             this.elements.push({
-//                 element,
-//                 speed,
-//                 offset: element.offsetTop
-//             });
-//         });
-//     }
-
-//     bindEvents() {
-//         window.addEventListener('scroll', () => {
-//             if (!this.rafId) {
-//                 this.rafId = requestAnimationFrame(() => this.updateElements());
-//             }
-//         });
-//     }
-
-//     updateElements() {
-//         const scrollTop = window.pageYOffset;
-
-//         this.elements.forEach(({ element, speed, offset }) => {
-//             const rect = element.getBoundingClientRect();
-//             const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
-
-//             if (isVisible) {
-//                 const yPos = (scrollTop - offset) * speed;
-//                 element.style.transform = `translateY(${yPos}px)`;
-//             }
-//         });
-
-//         this.rafId = null;
-//     }
-// }
-
-// Initialize parallax controller - DISABLED
-// document.addEventListener('DOMContentLoaded', () => {
-//     new ParallaxController();
-// });
-
-// Lazy loading for images
-const images = document.querySelectorAll('img');
-const imageObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            const img = entry.target;
-            if (img.dataset.src) {
-                img.src = img.dataset.src;
-                img.removeAttribute('data-src');
+// Animate elements on scroll
+const animateOnScroll = () => {
+    const elements = document.querySelectorAll('.section-header, .project-card, .skill-item, .about-content, .hero-content');
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('fade-in');
+                observer.unobserve(entry.target);
             }
-            imageObserver.unobserve(img);
-        }
+        });
+    }, { threshold: 0.1 });
+    
+    elements.forEach(element => {
+        observer.observe(element);
     });
-});
+};
 
-images.forEach(img => imageObserver.observe(img));
+animateOnScroll();
 
-// Smooth reveal animation for sections
-const revealElements = document.querySelectorAll('.section-header, .hero-content');
-revealElements.forEach((el, index) => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(30px)';
-    el.style.transition = 'all 0.8s ease';
-    el.style.transitionDelay = `${index * 0.2}s`;
-
+// Initialize all functions
+document.addEventListener('DOMContentLoaded', () => {
+    showLoadingScreen();
+    handleNavScroll();
+    
     setTimeout(() => {
-        el.style.opacity = '1';
-        el.style.transform = 'translateY(0)';
-    }, 300);
+        add3DCardEffect();
+        createProjectModals();
+        animateCounters();
+        enhanceScrollAnimations();
+        animateOnScroll();
+    }, 1500);
 });
-/**
- * YouTube Tutorial:
- * https://youtu.be/wG_5453Vq98
- */
-
-console.clear();
-
-// Select the circle element
-const circleElement = document.querySelector('.circle');
-
-// Create objects to track mouse position and custom cursor position
-const mouse = { x: 0, y: 0 }; // Track current mouse position
-const previousMouse = { x: 0, y: 0 } // Store the previous mouse position
-const circle = { x: 0, y: 0 }; // Track the circle position
-
-// Initialize variables to track scaling and rotation
-let currentScale = 0; // Track current scale value
-let currentAngle = 0; // Track current angle value
-
-// Update mouse position on the 'mousemove' event
-window.addEventListener('mousemove', (e) => {
-  mouse.x = e.x;
-  mouse.y = e.y;
-});
-
-// Smoothing factor for cursor movement speed (0 = smoother, 1 = instant)
-const speed = 0.17;
-
-// Start animation
-const tick = () => {
-  // MOVE
-  // Calculate circle movement based on mouse position and smoothing
-  circle.x += (mouse.x - circle.x) * speed;
-  circle.y += (mouse.y - circle.y) * speed;
-  // Create a transformation string for cursor translation
-  const translateTransform = `translate(${circle.x}px, ${circle.y}px)`;
-
-  // SQUEEZE
-  // 1. Calculate the change in mouse position (deltaMouse)
-  const deltaMouseX = mouse.x - previousMouse.x;
-  const deltaMouseY = mouse.y - previousMouse.y;
-  // Update previous mouse position for the next frame
-  previousMouse.x = mouse.x;
-  previousMouse.y = mouse.y;
-  // 2. Calculate mouse velocity using Pythagorean theorem and adjust speed
-  const mouseVelocity = Math.min(Math.sqrt(deltaMouseX**2 + deltaMouseY**2) * 4, 150); 
-  // 3. Convert mouse velocity to a value in the range [0, 0.5]
-  const scaleValue = (mouseVelocity / 150) * 0.5;
-  // 4. Smoothly update the current scale
-  currentScale += (scaleValue - currentScale) * speed;
-  // 5. Create a transformation string for scaling
-  const scaleTransform = `scale(${1 + currentScale}, ${1 - currentScale})`;
-
-  // ROTATE
-  // 1. Calculate the angle using the atan2 function
-  const angle = Math.atan2(deltaMouseY, deltaMouseX) * 180 / Math.PI;
-  // 2. Check for a threshold to reduce shakiness at low mouse velocity
-  if (mouseVelocity > 20) {
-    currentAngle = angle;
-  }
-  // 3. Create a transformation string for rotation
-  const rotateTransform = `rotate(${currentAngle}deg)`;
-
-  // Apply all transformations to the circle element in a specific order: translate -> rotate -> scale
-  circleElement.style.transform = `${translateTransform} ${rotateTransform} ${scaleTransform}`;
-
-  // Request the next frame to continue the animation
-  window.requestAnimationFrame(tick);
-}
-
-// Start the animation loop
-tick();
