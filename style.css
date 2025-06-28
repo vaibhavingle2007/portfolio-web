@@ -7,6 +7,26 @@
     --scrollbar-thumb-color: #E42C2C;
     --scrollbar-thumb-hover-color: #c71f1f;
 }
+@font-face {
+  font-family: 'Array-Bold';
+  src: url('assets/fonts/Array-Bold.woff2') format('woff2'),
+       url('assets/fonts/Array-Bold.woff') format('woff'),
+       url('assets/fonts/Array-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-display: swap;
+  font-style: normal;
+}
+
+
+@font-face {
+  font-family: 'Teko-Bold';
+  src: url('assets/fonts/Teko-Bold.woff2') format('woff2'),
+       url('assets/fonts/Teko-Bold.woff') format('woff'),
+       url('assets/fonts/Teko-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-display: swap;
+  font-style: normal;
+}
 
 * {
     margin: 0;
@@ -20,7 +40,7 @@ html {
 }
 
 body {
-    font-family: "Inter", sans-serif;
+    font-family: 'Space Grotesk', sans-serif;
     line-height: 1.6;
     color: var(--text-color);
     background-color: var(--background-color);
@@ -187,7 +207,7 @@ body {
 }
 
 .hero-title {
-    font-family: "Inter", sans-serif;
+     font-family: 'Teko-Bold', sans-serif;
     font-weight: 800;
     font-size: 4rem;
     line-height: 1.2;
@@ -590,12 +610,12 @@ body {
 .modal-header h2 {
     font-size: 2rem;
     font-weight: 700;
-    color: #fff;
+    color: var(--text-color);
 }
 
 .modal-description {
     font-size: 1.1rem;
-    color: #b0c4de;
+    color: rgba(17, 17, 17, 0.7);
     margin-bottom: 2rem;
     line-height: 1.7;
 }
@@ -608,7 +628,7 @@ body {
     font-size: 1.3rem;
     font-weight: 600;
     margin-bottom: 1rem;
-    color: #e2e8f0;
+    color: var(--text-color);
 }
 
 .tech-tags {
@@ -621,7 +641,7 @@ body {
     font-size: 0.9rem;
     padding: 0.5rem 1rem;
     border-radius: 20px;
-    background-color: rgba(255, 255, 255, 0.08);
+    background-color: rgba(124, 123, 123, 0.459);
     border: 1px solid rgba(255, 255, 255, 0.1);
     transition: all 0.3s ease;
 }
@@ -644,7 +664,7 @@ body {
     align-items: center;
     gap: 0.75rem;
     font-size: 1rem;
-    color: #b0c4de;
+    color: rgba(48, 48, 48, 0.7);
 }
 
 .features-list svg {
@@ -851,17 +871,17 @@ body {
     justify-content: center;
     border-radius: 50%;
     background-color: rgba(255, 255, 255, 0.1);
-    color: #fff;
+    color: #000000;
     transition: all 0.3s ease;
 }
 
 .profile-card-social__item:hover {
     transform: scale(1.1);
-    color: #000;
+    color: #ffffff;
 }
 
 .profile-card-social__item.github:hover {
-    background-color: #fff;
+    background-color: #000000;
 }
 
 .profile-card-social__item.instagram:hover {
