@@ -65,7 +65,7 @@ portfolio-web/
 
 ## 🖼️ Screenshots
 
-![Hero Section](assets/chat-bot.png)
+![Hero Section](assets/image.png)
 
 ---
 
