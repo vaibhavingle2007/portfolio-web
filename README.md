@@ -2,7 +2,7 @@
 
 A modern, responsive portfolio website to showcase my projects, skills, and contact information. Designed with a focus on minimalism, smooth UX, and clean code.
 
-![Portfolio Preview](assets/chat-bot.png)
+![Portfolio Preview](assets/screenshot.png)
 
 ---
 
