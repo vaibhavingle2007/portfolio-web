@@ -170,17 +170,45 @@ body {
 }
 
 .nav-toggle {
-    display: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 44px;
+    height: 44px;
+    background: rgba(255, 255, 255, 0);
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
     cursor: pointer;
+    transition: background 0.2s;
+    z-index: 1100;
+    border: none;
+    outline: none;
+    position: relative;
+}
+
+.nav-toggle:active,
+.nav-toggle:focus {
+    background: #f5f5f5;
 }
 
 .bar {
-    display: block;
-    width: 25px;
+    width: 24px;
     height: 3px;
-    margin: 5px auto;
     background-color: var(--text-color);
-    transition: all 0.3s ease-in-out;
+    margin: 3px 0;
+    border-radius: 2px;
+    transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.nav-toggle.active .bar:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+.nav-toggle.active .bar:nth-child(2) {
+    opacity: 0;
+}
+.nav-toggle.active .bar:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
 }
 
 /* Hero Section */
@@ -308,8 +336,11 @@ body {
 /* Mobile Navigation */
 @media (max-width: 768px) {
     .nav {
-        width: 90%;
-        padding: 15px 20px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1200;
     }
     
     .nav-container {
@@ -338,7 +369,7 @@ body {
     }
     
     .nav-menu.active {
-        left: 0;
+        left: 30%;
     }
     
     .nav-link-resume {
@@ -348,19 +379,7 @@ body {
     }
     
     .nav-toggle {
-        display: block;
-    }
-    
-    .nav-toggle.active .bar:nth-child(1) {
-        transform: translateY(8px) rotate(45deg);
-    }
-    
-    .nav-toggle.active .bar:nth-child(2) {
-        opacity: 0;
-    }
-    
-    .nav-toggle.active .bar:nth-child(3) {
-        transform: translateY(-8px) rotate(-45deg);
+        display: flex;
     }
     
     .hero-title {
@@ -1451,17 +1470,6 @@ body {
         display: flex;
     }
 
-    .nav-toggle.active .bar:nth-child(1) {
-        transform: rotate(45deg) translate(5px, 5px);
-    }
-
-    .nav-toggle.active .bar:nth-child(2) {
-        opacity: 0;
-    }
-
-    .nav-toggle.active .bar:nth-child(3) {
-        transform: rotate(-45deg) translate(7px, -6px);
-    }
     .hero-title {
         font-size: 2.5rem;        
     }
@@ -1674,4 +1682,10 @@ section {
         height: 80px;
         opacity: 0;
     }
+}
+
+@media (min-width: 769px) {
+  .nav-toggle {
+    display: none !important;
+  }
 }
