@@ -68,7 +68,7 @@ function createProjectModals() {
                 'SEO-optimized blog post creation',
                 'Multiple output formats'
             ],
-            github: 'https://github.com/vaibhavingle2007/yt_to_blog',
+            github: 'https://github.com/kartikey2001/YTBlogs',
             demo: '#'
         },
         'discover-india': {
