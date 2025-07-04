@@ -496,7 +496,7 @@ body {
 }
 
 .project-details-btn:hover {
-  background: var(--azuki-gradient);
+  background: var(--azuki-accent);
   border-color: transparent;
   color: white;
 }
