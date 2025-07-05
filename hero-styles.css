@@ -8,16 +8,13 @@
     padding: 0 20px;
     margin: 0;
     min-height: 600px; /* Ensure minimum height on smaller screens */
-    width: 100%;
-    overflow-x: hidden;
 }
 
 .modern-hero-content {
     text-align: center;
     max-width: 900px;
-    width: 100%; /* Changed from 90% to ensure full width containment */
+    width: 90%; /* Increased from 70% for better mobile display */
     padding: 20px 0;
-    box-sizing: border-box;
 }
 
 .modern-hero-title {
@@ -47,25 +44,15 @@
         height: auto;
         min-height: 100vh;
         padding-top: 80px; /* Account for fixed navbar */
-        padding-bottom: 40px;
     }
     
     .modern-hero-title {
         font-size: 3rem;
-        padding: 0 10px;
-        word-break: break-word;
-        hyphens: auto;
     }
     
     .modern-rotating-container {
         min-width: 120px;
         padding: 0.1em 0.6em;
-        display: inline-block;
-        margin: 5px 0;
-    }
-    
-    span[style="white-space: nowrap;"] {
-        white-space: normal !important;
     }
     
     .modern-hero-description {
@@ -194,17 +181,5 @@
 @supports (-webkit-touch-callout: none) {
     .modern-hero {
         height: -webkit-fill-available;
-    }
-} 
-
-.nowrap-container {
-    white-space: nowrap;
-    display: inline-block;
-}
-
-@media (max-width: 480px) {
-    .nowrap-container {
-        white-space: normal;
-        display: inline;
     }
 } 

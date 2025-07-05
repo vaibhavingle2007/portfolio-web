@@ -36,7 +36,7 @@
             </div>
             <a href="resume.pdf" class="nav-link-resume" download="Vaibhav_Ingle_Resume.pdf">Resume</a>
 
-            <div class="nav-toggle" id="nav-toggle" onclick="toggleNav()">
+            <div class="nav-toggle" id="nav-toggle">
                 <span class="bar"></span>
                 <span class="bar"></span>
                 <span class="bar"></span>
@@ -50,7 +50,7 @@
             <h1 class="modern-hero-title">
                 BUILDING COOL STUFF<br>
                 WHILE LEARNING EVEN<br>
-                <span class="nowrap-container">
+                <span style="white-space: nowrap;">
                     <span class="modern-rotating-container">
                         <span class="modern-rotating-word">smarter</span>
                     </span> THINGS.
@@ -67,46 +67,30 @@
     </section>
 
     <script>
-        // Direct nav toggle function
-        function toggleNav() {
-            const navMenu = document.getElementById('nav-menu');
-            const navToggle = document.getElementById('nav-toggle');
-            
-            if (navMenu && navToggle) {
-                if (navMenu.classList.contains('active')) {
-                    navMenu.classList.remove('active');
-                    navToggle.classList.remove('active');
-                } else {
-                    navMenu.classList.add('active');
-                    navToggle.classList.add('active');
-                }
-                console.log('Nav toggle clicked, menu is now:', navMenu.classList.contains('active') ? 'active' : 'inactive');
-            }
-        }
-
-        // Fallback for browsers that might not support onclick attribute
+        // Mobile navigation menu toggle
         document.addEventListener('DOMContentLoaded', function() {
             const navToggle = document.getElementById('nav-toggle');
-            if (navToggle) {
-                navToggle.addEventListener('click', function(e) {
-                    toggleNav();
+            const navMenu = document.getElementById('nav-menu');
+            
+            if (navToggle && navMenu) {
+                navToggle.addEventListener('click', function() {
+                    navToggle.classList.toggle('active');
+                    navMenu.classList.toggle('active');
                 });
-            }
-
-            // Close menu when clicking on a link
-            const navLinks = document.querySelectorAll('.nav-link');
-            navLinks.forEach(link => {
-                link.addEventListener('click', function() {
-                    const navMenu = document.getElementById('nav-menu');
-                    const navToggle = document.getElementById('nav-toggle');
-                    if (navMenu && navToggle) {
+                
+                // Close menu when clicking on a link
+                const navLinks = document.querySelectorAll('.nav-link');
+                navLinks.forEach(link => {
+                    link.addEventListener('click', function() {
                         navToggle.classList.remove('active');
                         navMenu.classList.remove('active');
-                    }
+                    });
                 });
-            });
-
-            // Rotating words in hero section
+            }
+        });
+        
+        // Rotating words in hero section
+        document.addEventListener('DOMContentLoaded', function() {
             const words = ["smarter", "bolder", "cleaner", "crazier", "newer"];
             const rotatingWord = document.querySelector('.modern-rotating-word');
             let currentIndex = 0;

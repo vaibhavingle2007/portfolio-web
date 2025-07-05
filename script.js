@@ -320,44 +320,24 @@ function enhanceScrollAnimations() {
     });
 }
 
-// Mobile Navigation Fix
-function setupMobileNav() {
-    const navToggle = document.getElementById('nav-toggle');
-    const navMenu = document.getElementById('nav-menu');
-    
-    if (navToggle && navMenu) {
-        // Initialize menu state
+// Mobile Navigation Toggle
+const navToggle = document.getElementById('nav-toggle');
+const navMenu = document.getElementById('nav-menu');
+
+if (navToggle && navMenu) {
+navToggle.addEventListener('click', () => {
+        navToggle.classList.toggle('active');
+    navMenu.classList.toggle('active');
+});
+
+    // Close menu when clicking on links
+    const navLinks = document.querySelectorAll('.nav-link');
+    navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+            navToggle.classList.remove('active');
         navMenu.classList.remove('active');
-        navToggle.classList.remove('active');
-        
-        navToggle.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            navToggle.classList.toggle('active');
-            navMenu.classList.toggle('active');
-            console.log('Nav toggle clicked, menu is now:', navMenu.classList.contains('active') ? 'active' : 'inactive');
         });
-        
-        // Close menu when clicking on a link
-        const navLinks = document.querySelectorAll('.nav-link');
-        navLinks.forEach(link => {
-            link.addEventListener('click', function() {
-                navToggle.classList.remove('active');
-                navMenu.classList.remove('active');
-            });
-        });
-        
-        // Close menu when clicking outside
-        document.addEventListener('click', function(e) {
-            const isClickInsideMenu = navMenu.contains(e.target);
-            const isClickOnToggle = navToggle.contains(e.target);
-            
-            if (!isClickInsideMenu && !isClickOnToggle && navMenu.classList.contains('active')) {
-                navToggle.classList.remove('active');
-                navMenu.classList.remove('active');
-            }
-        });
-    }
+    });
 }
 
 // Smooth scrolling for navigation links
@@ -463,6 +443,5 @@ document.addEventListener('DOMContentLoaded', () => {
         animateOnScroll();
         animateSkillCards();
         setupRotatingWords(); // Add this line to initialize the rotating words
-        setupMobileNav(); // Add this line to initialize mobile navigation
     }, 1500);
 });
