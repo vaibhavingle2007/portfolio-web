@@ -214,7 +214,7 @@ body {
 /* Hero Section */
 .hero {
     padding: 0;
-    background-color: var(--background-color);
+    background-color: #f8f8f5;
     position: relative;
     overflow: hidden;
     height: 100vh;
@@ -235,24 +235,58 @@ body {
 }
 
 .hero-title {
-     font-family: 'Teko-Bold', sans-serif;
+    font-family: 'Poppins', sans-serif;
     font-weight: 800;
     font-size: 4rem;
     line-height: 1.2;
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
     color: #000000;
     text-align: center;
     width: 100%;
     max-width: 800px;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+}
+
+.rotating-word-container {
+  background-color: #ff5a5f;
+  color: white;
+  display: inline-block;
+  padding: 0.1em 0.8em;
+  border-radius: 30px;
+  min-width: 150px;
+  text-align: center;
+}
+
+.rotating-word {
+  color: white;
+  font-weight: bold;
+}
+
+@keyframes rotateWords {
+    0%, 16% {
+        transform: translateY(0);
+    }
+    20%, 36% {
+        transform: translateY(0);
+    }
+    40%, 56% {
+        transform: translateY(0);
+    }
+    60%, 76% {
+        transform: translateY(0);
+    }
+    80%, 96% {
+        transform: translateY(0);
+    }
 }
 
 .hero-description {
     font-size: 1.25rem;
-    color: #666;
     margin-bottom: 2.5rem;
+    color: #666666;
     max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
+    font-family: 'Poppins', sans-serif;
     text-align: center;
 }
 
@@ -278,14 +312,19 @@ body {
 }
 
 .btn-primary {
-    background-color: var(--primary-color);
+    background-color: #ff5a5f;
     color: white;
     border: none;
+    padding: 12px 28px;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
 }
 
 .btn-primary:hover {
-    background-color: #c71f1f;
+    background-color: #ff4146;
     transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(255, 90, 95, 0.3);
 }
 
 .btn-secondary {
@@ -1272,7 +1311,7 @@ body {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    color: #a0aec0;
+    color: var(--text-color);
     text-decoration: none;
     font-weight: 500;
     font-size: 0.9rem;
@@ -1282,8 +1321,8 @@ body {
 }
 
 .project-link-btn:hover {
-    color: #667eea;
-    border-bottom-color: #667eea;
+    color: #3b5ae6;
+    border-bottom-color: #3b5ae6;
 }
 
 .project-button {
@@ -1976,4 +2015,47 @@ section {
 
 .modal-btn-primary:hover {
     background: var(--primary-color-dark, #e03b36);
+}
+
+/* Responsive styles for the hero section */
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .rotating-word-container {
+        padding: 0.15em 0.5em;
+    }
+    
+    .hero-description {
+        font-size: 1rem;
+        padding: 0 10px;
+    }
+    
+    .hero-buttons {
+        flex-direction: column;
+        gap: 0.75rem;
+        width: 100%;
+        max-width: 250px;
+    }
+    
+    .btn {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: 2rem;
+    }
+    
+    .rotating-word-container {
+        padding: 0.1em 0.4em;
+    }
+}
+
+@media (min-width: 1200px) {
+    .hero-title {
+        font-size: 4.5rem;
+    }
 }

@@ -2,14 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Vaibhav Ingle - Portfolio</title>
     <meta name="description" content="Full Stack Developer & Designer">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="theme-azuki.css">
+    <link rel="stylesheet" href="hero-styles.css">
+    <link rel="stylesheet" href="mobile.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=Poppins:wght@400;500;700;800&display=swap" rel="stylesheet">
  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 <link rel="apple-touch-icon" sizes="180x180" href="favicon_io/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon_io/favicon-32x32.png">
@@ -34,7 +36,7 @@
             </div>
             <a href="resume.pdf" class="nav-link-resume" download="Vaibhav_Ingle_Resume.pdf">Resume</a>
 
-            <div class="nav-toggle" id="nav-toggle">
+            <div class="nav-toggle" id="nav-toggle" onclick="toggleNav()">
                 <span class="bar"></span>
                 <span class="bar"></span>
                 <span class="bar"></span>
@@ -43,20 +45,91 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero">
-            <div class="hero-content">
-                <h1 class="hero-title">
-                    Building Cool Stuff While Learning Even Cooler Things.
-                </h1>
-                <p class="hero-description">
-                    I'm a student diving into design, code, and creativity — making things that look good and work even better.
-                </p>
-                <div class="hero-buttons">
-                    <a href="#projects" class="btn btn-primary">View Project</a>
-                    <a href="#contact" class="btn btn-secondary">Get In Touch</a>
-                </div>
+    <section class="modern-hero">
+        <div class="modern-hero-content">
+            <h1 class="modern-hero-title">
+                BUILDING COOL STUFF<br>
+                WHILE LEARNING EVEN<br>
+                <span class="nowrap-container">
+                    <span class="modern-rotating-container">
+                        <span class="modern-rotating-word">smarter</span>
+                    </span> THINGS.
+                </span>
+            </h1>
+            <p class="modern-hero-description">
+                Passionate about web development and creative problem-solving.
+            </p>
+            <div class="modern-hero-buttons">
+                <a href="#projects" class="modern-hero-button">View Projects</a>
+                <a href="#contact" class="modern-hero-button-secondary">Get in Touch</a>
             </div>
+        </div>
     </section>
+
+    <script>
+        // Direct nav toggle function
+        function toggleNav() {
+            const navMenu = document.getElementById('nav-menu');
+            const navToggle = document.getElementById('nav-toggle');
+            
+            if (navMenu && navToggle) {
+                if (navMenu.classList.contains('active')) {
+                    navMenu.classList.remove('active');
+                    navToggle.classList.remove('active');
+                } else {
+                    navMenu.classList.add('active');
+                    navToggle.classList.add('active');
+                }
+                console.log('Nav toggle clicked, menu is now:', navMenu.classList.contains('active') ? 'active' : 'inactive');
+            }
+        }
+
+        // Fallback for browsers that might not support onclick attribute
+        document.addEventListener('DOMContentLoaded', function() {
+            const navToggle = document.getElementById('nav-toggle');
+            if (navToggle) {
+                navToggle.addEventListener('click', function(e) {
+                    toggleNav();
+                });
+            }
+
+            // Close menu when clicking on a link
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    const navMenu = document.getElementById('nav-menu');
+                    const navToggle = document.getElementById('nav-toggle');
+                    if (navMenu && navToggle) {
+                        navToggle.classList.remove('active');
+                        navMenu.classList.remove('active');
+                    }
+                });
+            });
+
+            // Rotating words in hero section
+            const words = ["smarter", "bolder", "cleaner", "crazier", "newer"];
+            const rotatingWord = document.querySelector('.modern-rotating-word');
+            let currentIndex = 0;
+            
+            if (rotatingWord) {
+                // Set initial word and ensure it's visible
+                rotatingWord.textContent = words[0];
+                rotatingWord.style.opacity = 1;
+                
+                setInterval(() => {
+                    // Fade out
+                    rotatingWord.style.opacity = 0;
+                    
+                    setTimeout(() => {
+                        // Change word and fade in
+                        currentIndex = (currentIndex + 1) % words.length;
+                        rotatingWord.textContent = words[currentIndex];
+                        rotatingWord.style.opacity = 1;
+                    }, 300);
+                }, 2000);
+            }
+        });
+    </script>
 
     <!-- About Section -->
     <section id="about" class="about">
@@ -69,7 +142,7 @@
                 <div class="about-image">
                     <div class="profile-card">
                         <div class="profile-card__img">
-                            <img src="/vaibhav.png" alt="Vaibhav Ingle">
+                            <img src="vaibhav.png" alt="Vaibhav Ingle">
                         </div>
                         <div class="profile-card__cnt">
                             <div class="profile-card__name">Vaibhav Ingle</div>
