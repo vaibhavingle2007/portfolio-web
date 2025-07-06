@@ -372,8 +372,9 @@ body {
   content: '';
   position: absolute;
   bottom: -10px;
-  left: 0;
-  width: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
   height: 4px;
   background: var(--azuki-gradient);
   border-radius: 2px;
