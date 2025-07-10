@@ -85,7 +85,7 @@ function createProjectModals() {
                     <li>Support for various blog formats (article, tutorial, review, summary)</li>
                 </ul>
                 <div class="project-modal-actions">
-                    <a href="https://github.com/vaibhavingle2007/youtube-blog-converter" class="modal-btn" target="_blank">View Code</a>
+                    <a href="https://github.com/vaibhavingle2007/YTBlogs class="modal-btn" target="_blank">View Code</a>
                     <a href="https://yt-blogs.vercel.app/" class="modal-btn modal-btn-primary" target="_blank">Visit Website</a>
                 </div>
             `,
