@@ -1,55 +1,77 @@
-# Vaibhav Ingle Portfolio
+# Vaibhav Ingle Portfolio - Next.js Version
 
 ## Overview
-A modern, responsive portfolio website showcasing Vaibhav Ingle's projects, skills, and contact information. This is a static HTML/CSS/JavaScript website with a focus on minimalism, smooth UX, and clean code.
+A modern, responsive portfolio website showcasing Vaibhav Ingle's projects, skills, and contact information. Originally a static HTML/CSS/JavaScript website, now converted to Next.js for better performance, SEO, and modern React architecture.
 
 ## Project Type
-Static portfolio website (HTML/CSS/JavaScript)
+Next.js 15 web application with TypeScript
 
 ## Current Setup
-- **Server**: Python HTTP server serving static files
+- **Framework**: Next.js 15 with App Router
+- **Language**: TypeScript
 - **Port**: 5000 (frontend)
 - **Host**: 0.0.0.0
-- **Technology**: HTML5, CSS3, JavaScript (ES6+), GSAP animations
+- **Technology**: React 19, Next.js 15, TypeScript, CSS Modules
 - **Contact Form**: Formspree integration
+- **Deployment**: Autoscale deployment with build step
 
 ## Features
 - Minimal, Azuki-inspired UI/UX
 - Responsive design for all devices
-- Animated hero section with rotating words
-- Project showcase with modal popups
+- Animated hero section with rotating words (React hooks)
+- Project showcase with modal popups (React state management)
 - Downloadable resume
 - Contact form integration
 - Custom animations and effects
 - Social media links (GitHub, Instagram)
+- Server-side rendering for better SEO
+- Image optimization with Next.js Image component
+- Loading screen with smooth animations
 
 ## Project Structure
 ```
-portfolio-web/
-├── assets/           # Images & media files
-├── favicon_io/       # Favicons and site manifest
-├── index.html        # Main HTML file
-├── style.css         # Main styles
-├── theme-azuki.css   # Theme-specific styles
-├── hero-styles.css   # Hero section styles
-├── mobile.css        # Mobile responsive styles
-├── script.js         # JavaScript logic
-├── resume.pdf        # Downloadable resume
-├── vaibhav.png       # Profile image
-└── server.py         # Python HTTP server
+portfolio-nextjs/
+├── app/                # Next.js App Router
+│   ├── layout.tsx      # Root layout
+│   └── page.tsx        # Home page
+├── components/         # React components
+│   ├── Navigation.tsx  # Navigation bar
+│   ├── Hero.tsx        # Hero section
+│   ├── About.tsx       # About section
+│   ├── Projects.tsx    # Projects showcase
+│   ├── Contact.tsx     # Contact form
+│   ├── Footer.tsx      # Footer
+│   └── LoadingScreen.tsx # Loading animation
+├── public/            # Static assets
+│   ├── assets/        # Images & media files
+│   ├── favicon_io/    # Favicons
+│   ├── vaibhav.png    # Profile image
+│   └── resume.pdf     # Downloadable resume
+├── styles/            # Global styles
+│   ├── globals.css    # Main styles
+│   ├── theme-azuki.css # Theme styles
+│   ├── hero-styles.css # Hero section styles
+│   └── mobile.css     # Mobile responsive styles
+├── next.config.ts     # Next.js configuration
+├── tsconfig.json      # TypeScript configuration
+└── package.json       # Dependencies
 ```
 
 ## Running the Project
-The portfolio runs using a Python HTTP server configured to:
-- Serve files from the root directory
-- Listen on 0.0.0.0:5000
-- Disable caching for development
+Development: `npm run dev` (runs on 0.0.0.0:5000)
+Build: `npm run build`
+Production: `npm start`
 
 ## Recent Changes
-- **2024-11-24**: Initial Replit setup
-  - Added Python HTTP server for static file serving
-  - Configured workflow to run on port 5000
-  - Set up cache control headers for proper development experience
+- **2024-11-24**: Converted from HTML to Next.js
+  - Set up Next.js 15 project structure
+  - Converted HTML sections to React components
+  - Implemented React hooks for interactive features (rotating words, navigation, modals)
+  - Migrated CSS files to Next.js styles directory
+  - Fixed font paths for Next.js public directory
+  - Configured autoscale deployment
+  - Fixed hydration issues with LoadingScreen component
+  - Set up TypeScript with proper configuration
 
 ## Developer Info
 - **Developer**: Vaibhav Ingle
