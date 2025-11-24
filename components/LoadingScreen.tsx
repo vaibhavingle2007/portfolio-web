@@ -1,33 +1,22 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
 export default function LoadingScreen() {
-  const [isHidden, setIsHidden] = useState(false);
-  const [isMounted, setIsMounted] = useState(false);
+  const screenRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    setIsMounted(true);
-    
     const timer = setTimeout(() => {
-      setIsHidden(true);
+      if (screenRef.current) {
+        screenRef.current.style.display = 'none';
+      }
     }, 1500);
 
     return () => clearTimeout(timer);
   }, []);
 
-  if (!isMounted) {
-    return (
-      <div className="loading-screen">
-        <div className="loader"></div>
-      </div>
-    );
-  }
-
-  if (isHidden) return null;
-
   return (
-    <div className={`loading-screen ${isHidden ? 'hidden' : ''}`}>
+    <div ref={screenRef} className="loading-screen">
       <div className="loader"></div>
     </div>
   );

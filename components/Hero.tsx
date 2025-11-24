@@ -5,14 +5,14 @@ import { useState, useEffect } from 'react';
 export default function Hero() {
   const words = ["smarter", "bolder", "cleaner", "crazier", "newer"];
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
-  const [opacity, setOpacity] = useState(1);
+  const [isFading, setIsFading] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setOpacity(0);
+      setIsFading(true);
       setTimeout(() => {
         setCurrentWordIndex((prev) => (prev + 1) % words.length);
-        setOpacity(1);
+        setIsFading(false);
       }, 300);
     }, 2000);
 
@@ -28,8 +28,7 @@ export default function Hero() {
           <span style={{ whiteSpace: 'nowrap' }}>
             <span className="modern-rotating-container">
               <span 
-                className="modern-rotating-word" 
-                style={{ opacity, transition: 'opacity 0.3s ease' }}
+                className={`modern-rotating-word ${isFading ? 'fading' : ''}`}
               >
                 {words[currentWordIndex]}
               </span>

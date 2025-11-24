@@ -64,14 +64,21 @@ Production: `npm start`
 
 ## Recent Changes
 - **2024-11-24**: Converted from HTML to Next.js
-  - Set up Next.js 15 project structure
-  - Converted HTML sections to React components
-  - Implemented React hooks for interactive features (rotating words, navigation, modals)
-  - Migrated CSS files to Next.js styles directory
-  - Fixed font paths for Next.js public directory
-  - Configured autoscale deployment
-  - Fixed hydration issues with LoadingScreen component
-  - Set up TypeScript with proper configuration
+  - Set up Next.js 15 project structure with App Router
+  - Converted all HTML sections to React components (Navigation, Hero, About, Projects, Contact, Footer, LoadingScreen)
+  - Implemented React hooks for interactive features (rotating words, navigation scroll effects, project modals)
+  - Migrated all CSS files and assets to Next.js structure
+  - Fixed font paths to use Next.js public directory (absolute paths)
+  - Configured autoscale deployment with build step
+  - Changed GSAP loading strategy to afterInteractive for better SSR compatibility
+  - Fixed crossOrigin attribute for Google Fonts preconnect
+  - Added CSS class-based animations for Hero component word rotation
+  
+## Status
+- App successfully converted from HTML to Next.js
+- All components working correctly with React hooks
+- Hydration errors resolved through proper SSR/client rendering patterns
+- Production build successful with optimized static pages
 
 ## Developer Info
 - **Developer**: Vaibhav Ingle

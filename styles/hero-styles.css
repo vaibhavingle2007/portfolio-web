@@ -105,6 +105,11 @@
     color: white;
     font-weight: bold;
     transition: opacity 0.3s ease;
+    opacity: 1;
+}
+
+.modern-rotating-word.fading {
+    opacity: 0;
 }
 
 .modern-hero-description {
