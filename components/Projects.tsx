@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 
 interface Project {
@@ -32,7 +32,7 @@ const projectData: Record<string, Project> = {
         </ul>
         <div className="project-modal-actions">
           <a href="https://github.com/vaibhavingle2007/YTBlogs" className="modal-btn" target="_blank" rel="noopener noreferrer">View Code</a>
-          <a href="https://yt-blogs.vercel.app/" className="modal-btn modal-btn-primary" target="_blank" rel="noopener noreferrer">Visit Website</a>
+          <a href="https://yt-blogs-rho.vercel.app/" className="modal-btn modal-btn-primary" target="_blank" rel="noopener noreferrer">Visit Website</a>
         </div>
       </div>
     ),
@@ -114,6 +114,7 @@ const projectData: Record<string, Project> = {
 
 export default function Projects() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [isMounted, setIsMounted] = useState(false);
 
   const showProjectModal = (projectKey: string) => {
     setSelectedProject(projectData[projectKey]);
@@ -122,6 +123,10 @@ export default function Projects() {
   const closeModal = () => {
     setSelectedProject(null);
   };
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   return (
     <>
@@ -176,7 +181,7 @@ export default function Projects() {
         </div>
       </section>
 
-      {selectedProject && (
+      {isMounted && selectedProject && (
         <div className="modal active" id="project-modal" onClick={closeModal}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <button className="modal-close" onClick={closeModal}>&times;</button>

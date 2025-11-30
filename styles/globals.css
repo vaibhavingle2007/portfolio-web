@@ -752,7 +752,7 @@ body {
     right: 1rem;
     background: none;
     border: none;
-    color: #fff;
+    color: #000000;
     font-size: 1.5rem;
     cursor: pointer;
     padding: 0.5rem;
@@ -761,7 +761,7 @@ body {
 }
 
 .modal-close:hover {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.219);
 }
 
 /* Enhanced Scrollbar */
@@ -1918,7 +1918,7 @@ section {
     right: 1rem;
     background: none;
     border: none;
-    color: #fff;
+    color: #171717;
     font-size: 1.5rem;
     cursor: pointer;
     padding: 0.5rem;
