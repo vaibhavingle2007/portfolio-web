@@ -22,16 +22,31 @@ A modern, responsive portfolio website to showcase my projects, skills, and cont
 ## 📁 Project Structure
 
 ```
-portfolio-web/
-├── assets/           # Images & media
-├── favicon_io/       # Favicons
-├── index.html        # Main HTML
-├── style.css         # Main styles
-├── theme-azuki.css   # Theme styles
-├── script.js         # JS logic
-├── cursor.js         # Custom cursor
-├── resume.pdf        # Resume
-├── vaibhav.png       # Profile image
+portfolio-nextjs/
+├── app/                # Next.js App Router
+│   ├── layout.tsx      # Root layout
+│   └── page.tsx        # Home page
+├── components/         # React components
+│   ├── Navigation.tsx  # Navigation bar
+│   ├── Hero.tsx        # Hero section
+│   ├── About.tsx       # About section
+│   ├── Projects.tsx    # Projects showcase
+│   ├── Contact.tsx     # Contact form
+│   ├── Footer.tsx      # Footer
+│   └── LoadingScreen.tsx # Loading animation
+├── public/            # Static assets
+│   ├── assets/        # Images & media files
+│   ├── favicon_io/    # Favicons
+│   ├── vaibhav.png    # Profile image
+│   └── resume.pdf     # Downloadable resume
+├── styles/            # Global styles
+│   ├── globals.css    # Main styles
+│   ├── theme-azuki.css # Theme styles
+│   ├── hero-styles.css # Hero section styles
+│   └── mobile.css     # Mobile responsive styles
+├── next.config.ts     # Next.js configuration
+├── tsconfig.json      # TypeScript configuration
+└── package.json       # Dependencies
 ```
 
 ---
