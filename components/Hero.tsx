@@ -6,8 +6,10 @@ export default function Hero() {
   const words = ["smarter", "bolder", "cleaner", "crazier", "newer"];
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [isFading, setIsFading] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
+    setIsMounted(true);
     const interval = setInterval(() => {
       setIsFading(true);
       setTimeout(() => {
@@ -28,9 +30,9 @@ export default function Hero() {
           <span style={{ whiteSpace: 'nowrap' }}>
             <span className="modern-rotating-container">
               <span 
-                className={`modern-rotating-word ${isFading ? 'fading' : ''}`}
+                className={`modern-rotating-word ${isMounted && isFading ? 'fading' : ''}`}
               >
-                {words[currentWordIndex]}
+                {isMounted ? words[currentWordIndex] : words[0]}
               </span>
             </span> THINGS.
           </span>

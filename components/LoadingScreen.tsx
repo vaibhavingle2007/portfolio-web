@@ -1,22 +1,22 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function LoadingScreen() {
-  const screenRef = useRef<HTMLDivElement>(null);
+  const [show, setShow] = useState(true);
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      if (screenRef.current) {
-        screenRef.current.style.display = 'none';
-      }
+      setShow(false);
     }, 1500);
 
     return () => clearTimeout(timer);
   }, []);
 
+  if (!show) return null;
+
   return (
-    <div ref={screenRef} className="loading-screen">
+    <div className="loading-screen">
       <div className="loader"></div>
     </div>
   );
